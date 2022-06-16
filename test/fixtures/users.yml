@@ -9,6 +9,6 @@
 #   email: MyString
 
 rey:
-  name: Rey 
-  email: rey1@email.com
+  name: rey
+  email: rey@email.com
   password_digest: <%= User.digest('password') %>
