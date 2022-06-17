@@ -16,7 +16,7 @@ module SessionsHelper
     end
 
     def logged_in?
-        !current_user
+        !current_user.nil?
     end
 
     def log_out
@@ -36,4 +36,11 @@ module SessionsHelper
         cookies.delete(:user_id)
         cookies.delete(:remember_token)
     end
+
+
+    # ################################# to deny non-logged in user in accessing user pages ###################################
+    # def deny_access
+    #     redirect_to login_path
+    #     flash[:warning] = "Please login/signin first"
+    # end
 end

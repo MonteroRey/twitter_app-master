@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   
+  #before_action :check_if_logged_in, only: [:show, :edit, :update, :delete] ################# deny access
+  before_action :logged_in_user, only: [:show, :edit, :update]
+
   def show
     @user = User.find(params[:id])
   end
@@ -8,6 +11,7 @@ class UsersController < ApplicationController
   end
 
   def create 
+    byebug
     @user = User.new(user_params)
     if @user.save
       log_in @user
@@ -20,6 +24,27 @@ class UsersController < ApplicationController
   
   def index
 
+  end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      flash[:success] = "Profile updated"
+      redirect_to @user 
+    else
+      render 'edit'
+    end
+  end
+
+  def logged_in_user
+    unless logged_in?
+      flash[:danger]="Please log in"
+      redirect_to login_url
+    end
   end
 
   private 
