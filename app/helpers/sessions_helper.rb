@@ -7,6 +7,7 @@ module SessionsHelper
        if (user_id = session[:user_id])
         @current_user ||= User.find_by(id: user_id)
        elsif (user_id = cookies.encrypted[:user_id])
+        raise
         user=User.find_by(id: user_id)
         if user && user.authenticated?(cookies[:remember_token])
             log_in user
@@ -43,4 +44,10 @@ module SessionsHelper
     #     redirect_to login_path
     #     flash[:warning] = "Please login/signin first"
     # end
+
+    def current_user?(user)
+        byebug
+        user && user == current_user
+    end
+
 end
