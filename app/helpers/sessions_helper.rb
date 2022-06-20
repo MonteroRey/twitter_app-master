@@ -50,4 +50,13 @@ module SessionsHelper
         user && user == current_user
     end
 
+    def redirect_back_or(default) 
+        redirect_to(session[:forwarding_url] || default)
+    end
+
+    def store_location 
+        byebug
+        session[:forwadding_url] = request.original_url if request.get?
+    end
+
 end

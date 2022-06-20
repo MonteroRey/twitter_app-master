@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 #######################################
 gem 'bootstrap-sass', '3.4.1'
 gem 'bcrypt', '3.1.13'
+gem 'faker',  '2.11.0'
 
 
 group :development, :test do

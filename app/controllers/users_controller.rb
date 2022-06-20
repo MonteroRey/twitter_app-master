@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
   
   #before_action :check_if_logged_in, only: [:show, :edit, :update, :delete] ################# deny access
-  before_action :logged_in_user, only: [:show, :edit, :update]
-  before_action :current_user, only: [:show, :edit, :update]
+  before_action :logged_in_user, only: [:index, :edit, :update]
+  before_action :current_user, only: [:edit, :update]
+  def index
+    @users = User.all
+  end
 
   def show
     @user = User.find(params[:id])
@@ -22,9 +25,6 @@ class UsersController < ApplicationController
     end
   end
   
-  def index
-
-  end
 
   def edit
     @user = User.find(params[:id])
@@ -42,14 +42,15 @@ class UsersController < ApplicationController
 
   def logged_in_user
     unless logged_in?
+      store_location
       flash[:danger]="Please log in"
       redirect_to login_url
     end
   end
 
   def correct_user
-    byebug  
     @user = User.find(params[:id])
+    redirect_to(root_url) unless current_user?(@user)
   end
 
 
