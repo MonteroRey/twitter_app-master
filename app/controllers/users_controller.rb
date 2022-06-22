@@ -16,10 +16,12 @@ class UsersController < ApplicationController
 
   def create 
     @user = User.new(user_params)
+    byebug
     if @user.save
-      log_in @user
-      flash[:success] = "Welcome to the Twitter Clone App"
-      redirect_to @user
+      UserMailer.account_activation(@user).deliver_now                  #log_in @user
+      flash[:success] = "Please check your email to activate your account"
+      byebug
+      redirect_to root_url
     else
       render 'new'
     end
@@ -39,6 +41,12 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+  ######### delete users #########################
+  def destroy
+    User.find(params[:id]).destroy 
+    flash[:success] = "User deleted"
+    redirect_to users_url
+  end
 
   def logged_in_user
     unless logged_in?
@@ -57,5 +65,10 @@ class UsersController < ApplicationController
   private 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  ################ confirms an admin user
+  def admin_user  
+    redirect_to(root_url) unless current_user.admin?
   end
 end
