@@ -7,10 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-User.create!(name: "Example User",
-                    email: "example@example.org",
-                    password: "foobar",
-                    password_confirmation: "foobar",
+User.create!(name: "admin",
+                    email: "admin@admin.org",
+                    password: "admin1234",
+                    password_confirmation: "admin1234",
                     admin: true,
                     activated: true,
                     activated_at: Time.zone.now)
