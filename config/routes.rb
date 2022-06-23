@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   get '/contact', to: 'static_pages#contact'
   root 'static_pages#home'
   resources :users
+  resources :account_activations , only: [:edit] 
+  resources :password_reset, only: [:new, :create , :edit ,:update]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
