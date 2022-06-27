@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   #before_action :check_if_logged_in, only: [:show, :edit, :update, :delete] ################# deny access
-  before_action :logged_in_user, only: [:index, :edit, :update]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy , :show]
   before_action :current_user, only: [:edit, :update]
   def index
     @users = User.paginate(page: params[:page])
@@ -67,6 +67,12 @@ class UsersController < ApplicationController
   private 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def correct_user 
+    byebug
+    @user = User.find(params[:id]) 
+    redirect_to(root_url) unless current_user?(@user)
   end
 
   ################ confirms an admin user
