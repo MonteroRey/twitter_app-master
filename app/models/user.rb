@@ -1,10 +1,11 @@
 class User < ApplicationRecord
 
-    has_many :posts , dependent: :destroy
+    has_many :posts , dependent: :destroy                                   ########## post will be destroyed if user itself id destroyed
     attr_accessor :remember_token , :activation_token , :reset_token
     before_save :downcase_email
     before_create :create_activation_digest
     validates :name, presence: true , length: {maximum: 50}
+
     ############################# email #############################################
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.(com|net|org)+\z/i
     validates :email, presence: true ,length: {maximum: 255} , format:{with: VALID_EMAIL_REGEX } ,
