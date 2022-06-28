@@ -1,10 +1,32 @@
-<div class="center jumbotron">
-<h1>Welcome to the Simple Twitter Clone App</h1>
-<h2>
-This is just a sample Twitter Clone App for more details , visit the
-<a href="https://guides.rubyonrails.org/">Ruby on Rails Tutorial</a>
-rails sample application.
-</h2>
-<%= link_to "Sign up now!", signup_path , class: "btn btn-lg btn-primary" %>
-</div>
+<% if logged_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <%= render 'shared/user_info' %>
+      </section>
+      <section class="stats">
+        <%= render 'shared/stats' %>
+      </section>
+      <section class="post_form">
+        <%= render 'shared/post_form' %>
+      </section>
+    </aside>
+    <div class="col-md-8">
+      <h3>Twitter Clone Post Feed</h3>
+      <%= render 'shared/feed' %>
+    </div>
+  </div>
+<% else %>
+  <div class="center jumbotron">
+    <h1>Welcome to the Simple Twitter Clone App</h1>
 
+    <h2>
+        This is just a sample Twitter Clone App for more details , visit the
+        <a href="https://guides.rubyonrails.org/">Ruby on Rails Tutorial</a>
+        rails sample application.
+    </h2>
+
+    <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+  </div>
+
+<% end %>
