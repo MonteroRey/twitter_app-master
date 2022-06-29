@@ -33,6 +33,9 @@ gem 'bcrypt', '3.1.13'
 gem 'faker',  '2.11.0'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
+gem 'image_processing'
+gem 'mini_magick'
+gem 'active_storage_validations'
 
 
 group :development, :test do

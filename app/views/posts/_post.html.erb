@@ -9,7 +9,7 @@
     Posted <%= time_ago_in_words(post.created_at) %> ago.
     <% if current_user?(post.user) %>
       <%byebug%>
-      <%= link_to "delete", post, method: :delete, data: { confirm: "You sure to delete this post ?" } %>
+      <%= button_to 'delete', post_path(:id => post), method: :delete , data: { confirm: "You sure to delete this post ?" } %>
     <% end %>
   </span>
 </li>
