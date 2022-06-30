@@ -3,13 +3,13 @@
   <span class="user"><%= link_to post.user.name, post.user %></span>
   <span class="content">
     <%= post.content %>
-    
+    <%byebug%>
+    <%= image_tag post.image if post.image.attached? %>
   </span>
   <span class="timestamp">
     Posted <%= time_ago_in_words(post.created_at) %> ago.
     <% if current_user?(post.user) %>
-      <%byebug%>
-      <%= button_to 'delete', post_path(:id => post), method: :delete , data: { confirm: "You sure to delete this post ?" } %>
+      <%= link_to 'delete', post, method: :delete , data: {confirm: "You sure to delete this post ?" } %>
     <% end %>
   </span>
 </li>
