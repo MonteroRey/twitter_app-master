@@ -103,11 +103,11 @@ class User < ApplicationRecord
 
 
 
-        
+
     end
 
     def feed  
-
+        following_ids=
     end
 
 end
