@@ -9,8 +9,16 @@
 
 User.create!(name: "admin",
                     email: "admin@admin.org",
-                    password: "admin1234",
-                    password_confirmation: "admin1234",
+                    password: "K0da_Koll3ct1v",
+                    password_confirmation: "K0da_Koll3ct1v",
+                    admin: true,
+                    activated: true,
+                    activated_at: Time.zone.now)
+
+User.create!(name: "Rey Montero",
+                    email: "rey.montero@kodakollectiv.com",
+                    password: "K0da_Koll3ct1v",
+                    password_confirmation: "K0da_Koll3ct1v",
                     admin: true,
                     activated: true,
                     activated_at: Time.zone.now)
@@ -19,7 +27,7 @@ User.create!(name: "admin",
 20.times do |n|
     name = Faker::Name.name 
     email = "email-#{n+1}@email.org"
-    password = "password"
+    password = "K0da_Koll3ct1v"
     User.create!(name: name,
                  email: email,
                  password: password,
