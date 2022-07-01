@@ -16,10 +16,20 @@ class User < ApplicationRecord
 
     ############################# email #############################################
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.(com|net|org)+\z/i
+
+    ############################# PASSWORD ###################################
+    PASSWORD_FORMAT = /\A
+            (?=.{8,})          # Must contain 8 or more characters
+            (?=.*\d)           # Must contain a digit
+            (?=.*[a-z])        # Must contain a lower case character
+            (?=.*[A-Z])        # Must contain an upper case character
+            (?=.*[[:^alnum:]]) # Must contain a symbol
+            /x
+
     validates :email, presence: true ,length: {maximum: 255} , format:{with: VALID_EMAIL_REGEX } ,
-    uniqueness: true #{case_sensitive: false}
+               uniqueness: true #{case_sensitive: false}
     has_secure_password
-    validates :password, presence: true , length: {minimum: 6},allow_nil: true
+    validates :password, presence: true , length: {minimum: 6},format: {with: PASSWORD_FORMAT} , allow_nil: true
     def self.digest(string)
         cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                       BCrypt::Engine.cost
@@ -73,7 +83,7 @@ class User < ApplicationRecord
     end
 
     def unfollow(other_user) 
-        following.delete(other_user)
+        following.delete(other_user) 
     end
 
     def following?(other_user)
@@ -90,8 +100,14 @@ class User < ApplicationRecord
     def create_activation_digest
         self.activation_token = User.new_token 
         self.activation_digest =User.digest(activation_token ) 
+
+
+
+        
     end
 
-    
+    def feed  
+
+    end
 
 end
