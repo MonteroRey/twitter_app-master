@@ -11,6 +11,7 @@
             <%= render 'shared/stats'%>
         </section>
         <div class="col-md-8">
+        <%= render 'follow_form' if logged_in? %>
         <%byebug%>
             <% if @user.posts.any?%>
                 <h3> Posts (<%= @user.posts.count%>) </h3>
