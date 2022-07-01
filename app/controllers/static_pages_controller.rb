@@ -1,6 +1,5 @@
 class StaticPagesController < ApplicationController
   def home
-    byebug
     #@post = current_user.posts.build if logged_in?
     if logged_in? 
       @post=current_user.posts.build 
